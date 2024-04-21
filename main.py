@@ -1,5 +1,6 @@
 from bintrees import FastRBTree
 
+
 class TaxPenaltyDatabase:
     def __init__(self):
         self.database = FastRBTree()
@@ -48,7 +49,8 @@ class TaxPenaltyDatabase:
     def add_penalty(self, person_id, penalty_type, amount, city):
         if person_id in self.database:
             self.database[person_id].append({'type': penalty_type, 'amount': amount, 'city': city})
-            print(f"Штраф типу {penalty_type} на суму {amount} для користувача з кодом {person_id} у місті {city} доданий до бази даних.")
+            print(
+                f"Штраф типу {penalty_type} на суму {amount} для користувача з кодом {person_id} у місті {city} доданий до бази даних.")
         else:
             print("Користувача з таким кодом не знайдено.")
 
@@ -86,17 +88,16 @@ class TaxPenaltyDatabase:
         else:
             print("Користувача з таким кодом не знайдено.")
 
+
 def main():
     database = TaxPenaltyDatabase()
 
-    # Додавання персон та їх штрафів
     database.add_person(123456789, "Іванов Іван", "Київ")
     database.add_penalty(123456789, "Порушення ПДР", 500, "Київ")
     database.add_penalty(123456789, "Порушення ПДР", 300, "Київ")
     database.add_person(987654321, "Петров Петро", "Львів")
     database.add_penalty(987654321, "Порушення ПДР", 200, "Львів")
 
-    # Вивід даних
     print("\n1. Повний друк бази даних:")
     database.print_database()
 
@@ -109,18 +110,16 @@ def main():
     print("\n4. Друк даних за конкретним містом:")
     database.print_data_by_city("Київ")
 
-    # Додавання нових штрафів та оновлення інформації
     database.add_penalty(987654321, "Паркування на газоні", 100, "Львів")
     database.update_person_info(123456789, name="Іванов Петро", city="Одеса")
     database.update_penalty_info(987654321, {'type': "Паркування на газоні", 'amount': 100, 'city': "Львів"},
-                                  penalty_type="Паркування на тротуарі", amount=150)
+                                 penalty_type="Паркування на тротуарі", amount=150)
 
-    # Видалення штрафу
     database.remove_penalty(987654321, {'type': "Порушення ПДР", 'amount': 200, 'city': "Львів"})
 
-    # Вивід оновлених даних
     print("\n1. Оновлений повний друк бази даних:")
     database.print_database()
+
 
 if __name__ == "__main__":
     main()
